@@ -1,10 +1,21 @@
 # Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation
+
+เอกสารนี้รวบรวมผลการทดลองจาก Terminal โดยจัดกลุ่มตามขั้นตอนการทำงานเดิม และคงรายละเอียดผลลัพธ์ไว้ครบถ้วน
+
+## 1. Motion Check — Mock Mode
+
+```text
 (.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --mode mock --motion-check
 motion check +x
 motion check +y
 motion check -x
 motion check -y
 ตำแหน่งหลัง motion check: (0.002, -0.009)
+```
+
+## 2. Motion Check — Robot Mode
+
+```text
 (.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --mode robot --motion-check --arm-robot
 ตรวจพื้นที่ว่างอย่างน้อย 2×2 เมตร แล้วกด Enter เพื่อวิ่งสี่เหลี่ยม 0.20 m...
 motion check +x
@@ -12,7 +23,12 @@ motion check +y
 motion check -x
 motion check -y
 ตำแหน่งหลัง motion check: (0.008, -0.003)
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase collect --mode mock --output-dir results/mock-model
+```
+
+## 3. Collect Calibration — Mock Mode
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase collect --mode mock --output-di[...]
 sample=01 action=(+0.20,+0.00) delta=(+0.066,-0.005)
 sample=02 action=(-0.20,+0.00) delta=(-0.066,+0.002)
 sample=03 action=(+0.00,+0.20) delta=(+0.007,+0.069)
@@ -41,7 +57,12 @@ learned dx weights: [0.836, 0.0919, 0.0009]
 learned dy weights: [-0.0365, 0.9117, -0.0011]
 fit RMSE=0.0030 m
 บันทึก model ที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/mock-model/model.json
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase collect --mode robot --arm-robot --output-dir results/robot-model
+```
+
+## 4. Collect Calibration — Robot Mode
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase collect --mode robot --arm-robo[...]
 วางหุ่นที่ S หันหัวตามแกน +x ตรวจพื้นที่ว่าง แล้วกด Enter เพื่อเก็บ calibration...
 sample=01 action=(+0.20,+0.00) delta=(+0.001,-0.079)
 sample=02 action=(-0.20,+0.00) delta=(-0.001,+0.075)
@@ -71,8 +92,14 @@ learned dx weights: [-0.1419, 0.8734, -0.0025]
 learned dy weights: [-1.0361, -0.0611, -0.0007]
 fit RMSE=0.0121 m
 บันทึก model ที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/robot-model/model.json
+
 (.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ code .
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file results/mock-model/model.json --reward sparse --planner cem --output-dir results/mock-sparse
+```
+
+## 5. Plan — Mock Mode — Sparse Reward with CEM
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file r[...]
 step=01 action=(-0.03,+0.01) distance=0.794m model_error=0.005m
 step=02 action=(-0.02,-0.02) distance=0.808m model_error=0.005m
 step=03 action=(+0.02,-0.02) distance=0.806m model_error=0.002m
@@ -113,7 +140,12 @@ step=24 action=(+0.05,+0.03) distance=0.797m model_error=0.001m
   "max_one_step_model_error_m": 0.005972213755140512
 }
 บันทึกผลที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/mock-sparse
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file results/mock-model/model.json --reward potential --planner cem --output-dir results/mock-shaped
+```
+
+## 6. Plan — Mock Mode — Potential Reward with CEM
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file [...]
 step=01 action=(+0.17,+0.12) distance=0.712m model_error=0.004m
 step=02 action=(+0.19,+0.09) distance=0.641m model_error=0.004m
 step=03 action=(+0.19,+0.09) distance=0.566m model_error=0.003m
@@ -139,7 +171,12 @@ step=09 action=(+0.22,+0.11) distance=0.094m model_error=0.005m
   "max_one_step_model_error_m": 0.00490835881345853
 }
 บันทึกผลที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/mock-shaped
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file results/mock-model/model.json --reward sparse --planner cem --output-dir results/mock-sparse
+```
+
+## 7. Repeated Plan Commands — Mock Mode
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file [...]
 
 python robomaster_model_based_lab.py --phase plan --mode mock --model-file results/mock-model/model.json --reward potential --planner cem --output-dir results/mock-shaped
 step=01 action=(-0.03,+0.01) distance=0.794m model_error=0.005m
@@ -207,7 +244,12 @@ step=09 action=(+0.22,+0.11) distance=0.094m model_error=0.005m
   "max_one_step_model_error_m": 0.00490835881345853
 }
 บันทึกผลที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/mock-shaped
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file results/mock-model/model.json --reward potential --planner mppi --output-dir results/mock-mppi
+```
+
+## 8. Plan — Mock Mode — Potential Reward with MPPI
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode mock --model-file [...]
 step=01 action=(+0.11,+0.08) distance=0.738m model_error=0.005m
 step=02 action=(+0.11,+0.03) distance=0.702m model_error=0.004m
 step=03 action=(+0.11,+0.05) distance=0.657m model_error=0.003m
@@ -238,7 +280,12 @@ step=14 action=(+0.16,+0.08) distance=0.038m model_error=0.002m
   "max_one_step_model_error_m": 0.005765271689709258
 }
 บันทึกผลที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/mock-mppi
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode robot --conn-type ap --arm-robot --model-file results/robot-model/model.json --reward potential --planner cem --output-dir results/robot-learned
+```
+
+## 9. Plan — Robot Mode — Connection Error
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode robot --conn-type [...]
 Traceback (most recent call last):
   File "robomaster_model_based_lab.py", line 446, in <module>
     main()
@@ -253,8 +300,13 @@ Traceback (most recent call last):
   File "/home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/.venv/lib/python3.8/site-packages/robomaster/conn.py", line 322, in request_connection
     "proxy addr {2}".format(local_addr, remote_addr, proxy_addr))
 UnboundLocalError: local variable 'proxy_addr' referenced before assignment
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode robot --arm-robot --model-file results/robot-model/model.json --reward potential --planner cem --output-dir results/robot-learned
-วางหุ่นที่ S หันหัวตามแกน +x และตรวจว่าไม่มีคนในสนาม แล้วกด Enter เพื่อเริ่ม MPC...
+```
+
+## 10. Plan — Robot Mode — Learned Model with CEM
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode robot --arm-robot [...]
+วางหุ่นที่ S หันหัวตามแกน +x และตรวจว่าไม่มีคนในสนาม แล้วกด Enter เพื่อเริ่[...]
 step=01 action=(-0.11,+0.19) distance=0.691m model_error=0.022m
 step=02 action=(-0.10,+0.19) distance=0.614m model_error=0.018m
 step=03 action=(-0.09,+0.18) distance=0.532m model_error=0.020m
@@ -279,8 +331,13 @@ step=08 action=(-0.10,+0.22) distance=0.091m model_error=0.023m
   "max_one_step_model_error_m": 0.023170719851705317
 }
 บันทึกผลที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/robot-learned
-(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode robot --arm-robot --model-source ideal --reward potential --planner cem --output-dir results/robot-ideal
-วางหุ่นที่ S หันหัวตามแกน +x และตรวจว่าไม่มีคนในสนาม แล้วกด Enter เพื่อเริ่ม MPC...
+```
+
+## 11. Plan — Robot Mode — Ideal Model with CEM
+
+```text
+(.venv) pcn@pcn-ThinkPad-E14-Gen-8:~/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation$ python robomaster_model_based_lab.py --phase plan --mode robot --arm-robot [...]
+วางหุ่นที่ S หันหัวตามแกน +x และตรวจว่าไม่มีคนในสนาม แล้วกด Enter เพื่อเริ่[...]
 step=01 action=(+0.18,+0.09) distance=0.860m model_error=0.159m
 step=02 action=(+0.18,+0.12) distance=0.948m model_error=0.176m
 step=03 action=(+0.19,+0.08) distance=1.045m model_error=0.180m
@@ -312,3 +369,4 @@ step=14 action=(+0.20,+0.09) distance=2.072m model_error=0.185m
   "max_one_step_model_error_m": 0.18878321282982372
 }
 บันทึกผลที่ /home/pcn/Classworks/Assignments/Lab_07_Learn_the_World_Specify_the_Goal_Test_in_Simulation/results/robot-ideal
+```
